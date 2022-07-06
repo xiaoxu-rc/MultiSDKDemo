@@ -35,23 +35,25 @@ TODO: Add long description of the pod here.
     'MultiSDKDemo' => ['MultiSDKDemo/Assets/*.png']
   }
   s.frameworks = 'UIKit', 'MapKit'
-  
-    s.subspec 'MyBaseSDK' do |base|
-        base.public_header_files = 'MultiSDKDemo/Classes/MyBaseSDK/**/*.h'
-        base.source_files = 'MultiSDKDemo/Classes/MyBaseSDK/**/*'
-        base.dependency 'AFNetworking', '3.0'
-        base.dependency 'YYModel'
-    end
-    
-    s.subspec 'MyBussinessOne' do |one|
-        one.public_header_files = 'MultiSDKDemo/Classes/MyBussinessOne/**/*.h'
-        one.source_files = 'MultiSDKDemo/Classes/MyBussinessOne/**/*'
-        one.dependency 'MultiSDKDemo/MyBaseSDK'
-    end
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
-    s.subspec 'MyBussinessTwo' do |two|
-        two.public_header_files = 'MultiSDKDemo/Classes/MyBussinessTwo/**/*.h'
-        two.source_files = 'MultiSDKDemo/Classes/MyBussinessTwo/**/*'
-        two.dependency 'MultiSDKDemo/MyBaseSDK'
-    end
+  s.subspec 'MyBaseSDK' do |base|
+    base.public_header_files = 'MultiSDKDemo/Classes/MyBaseSDK/**/*.h'
+    base.source_files = 'MultiSDKDemo/Classes/MyBaseSDK/**/*'
+    base.dependency 'AFNetworking', '3.0'
+    base.dependency 'YYModel'
+  end
+    
+  s.subspec 'MyBussinessOne' do |one|
+    one.public_header_files = 'MultiSDKDemo/Classes/MyBussinessOne/**/*.h'
+    one.source_files = 'MultiSDKDemo/Classes/MyBussinessOne/**/*'
+    one.dependency 'MultiSDKDemo/MyBaseSDK'
+  end
+
+  s.subspec 'MyBussinessTwo' do |two|
+    two.public_header_files = 'MultiSDKDemo/Classes/MyBussinessTwo/**/*.h'
+    two.source_files = 'MultiSDKDemo/Classes/MyBussinessTwo/**/*'
+    two.dependency 'MultiSDKDemo/MyBaseSDK'
+  end
 end
